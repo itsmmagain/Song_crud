@@ -5,7 +5,7 @@ from datetime import datetime
 class Artiste(models.Model):
     First_name = models.CharField(max_length=200)
     Last_name = models.CharField(max_length=200)
-    Age = models.IntegerField()
+    Age = models.IntegerField(null=True)
 
 
     def __str__(self):
@@ -14,8 +14,8 @@ class Artiste(models.Model):
 class Song(models.Model):
     Title = models.CharField(max_length=200)
     Release_date = models.DateField(default=datetime.today)
-    Likes = models.IntegerField()
-    Artiste_id = models.ForeignKey(Artiste, on_delete=models.PROTECT)
+    Likes = models.IntegerField(null = True)
+    Artiste_id = models.ForeignKey(Artiste, on_delete=models.CASCADE, null= True)
 
 
     def __str__(self):
@@ -24,7 +24,7 @@ class Song(models.Model):
 class Lyric(models.Model):
     Lyric = models.CharField(max_length=40)
     Content = models.TextField()
-    Song_id = models.ForeignKey(Song, on_delete=models.PROTECT)
+    Song_id = models.ForeignKey(Song, on_delete=models.CASCADE)
 
 
     def __str__(self):
